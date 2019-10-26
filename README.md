@@ -11,10 +11,10 @@ For BUPT course usage.
 - [tree](source/tree.py)  
 - [package](source/package.py)  
   
-<img src='image/package.png' width=60% />  
+<img src='image/package.png' width=40% />  
 
 ### TSP Problem  
 - [tree](source/tree.py)  
 - [TSP](source/tsp.py)  
 
-<img src='image/tsp.png' width=60% />  
+<img src='image/tsp.png' width=40% />  
