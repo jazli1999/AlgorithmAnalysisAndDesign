@@ -5,6 +5,7 @@ For BUPT course usage.
   - [Brute-Force](#brute-force)
     - [0-1 Package Problem](#0-1-package-problem)
     - [TSP Problem](#tsp-problem)
+    - [Perfect Match Problem](#perfect-match-problem)
 
 ## Brute-Force  
 ### 0-1 Package Problem  
@@ -18,3 +19,8 @@ For BUPT course usage.
 - [TSP](source/tsp.py)  
 
 <img src='image/tsp.png' width=40% />  
+
+### Perfect Match Problem  
+- [perfect match](source/perfect_match.py)  
+
+<img src='image/match.png' />
