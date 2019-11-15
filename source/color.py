@@ -30,6 +30,9 @@ class Tree:
             self.best = max(cur_colors)
             if level < len(self.cities):
                 for i in range(1, self.best + 2):
+                    # a new color choice will be tested in the end
+                    # in case that the current increase could result
+                    # in a latter success
                     new_node = Node()
                     node.children.append(new_node)
                     if self.expand(new_node, node.value[1], i, level + 1):

@@ -81,8 +81,10 @@ class Solution:
 
     
     def print_solution(self):
+        counter = 0
         for solution in self.best:
-            print('\nGuards needed: {0}'.format(len(solution)))
+            counter += 1
+            print('\nNo. {0} Guards needed: {1}'.format(counter, len(solution)))
             guards = zeros((self.m, self.n), dtype=int)
             for point in solution:
                 guards[point[0]][point[1]] = 1

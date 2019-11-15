@@ -24,7 +24,7 @@ class Solution:
         print(self.best)
 
 
-    def seek(self, node, stack, maze):                    # The same effect as Stack.top()
+    def seek(self, node, stack, maze): 
         if node.value == self.over:
             self.solutions.append(stack)
             if len(self.best) == 0:
