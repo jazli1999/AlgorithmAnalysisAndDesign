@@ -22,9 +22,9 @@ class Solution:
     def construct_tree(self):
         queue = [self.tree]
         item_list = list(item for i, item in enumerate(self.items))
-        for i, item in enumerate(item_list):
+        for item in item_list:
             queue_next = []
-            for j, parent in enumerate(queue):
+            for parent in queue:
                 conclude = Node(item)
                 exclude = Node(0)
                 parent.children.append(conclude)

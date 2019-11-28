@@ -7,7 +7,7 @@ lady_preference = [[2, 1, 3],
                    [1, 2, 3],
                    [1, 2, 3]]
 
-matches = [-1, -1, -1] 
+matches = [-1 for i in range(0, len(men))] 
 
 while -1 in matches:
     for i, man in enumerate(men):

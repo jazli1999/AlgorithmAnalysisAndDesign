@@ -15,7 +15,7 @@ class Node:
 
         while len(stack) > 0:
             if len(stack[-1].children) > 0:
-                for i, child in enumerate(stack[-1].children):
+                for child in stack[-1].children:
                     if child.status:
                         child.status = False
                         stack.append(child)
