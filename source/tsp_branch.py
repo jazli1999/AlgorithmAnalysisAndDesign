@@ -66,12 +66,12 @@ class Solution:
 
         while True in cities:
             next_one = None
-            for i, city in enumerate(cities):
-                if city:
-                    if next_one == None:
-                        next_one = i
-                    elif self.cost[last_one][next_one] > self.cost[last_one][i]:
-                        next_one = i
+            remain = [i for i in range(0, len(self.cost)) if cities[i]]
+            for i in remain:
+                if next_one == None:
+                    next_one = i
+                elif self.cost[last_one][next_one] > self.cost[last_one][i]:
+                    next_one = i
                 
             # add to total cost; move to the next one; mark next one
             total += self.cost[last_one][next_one]

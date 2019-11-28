@@ -55,7 +55,7 @@ class Solution:
         node.right.ub = self.ub_calculate(node.right, item[0])
 
         if node.left.weight <= self.capacity and node.left.ub >= self.down:
-            # weight below capacity && value bigger than lower boundary && possibly bigger than the other one
+            # weight below capacity && value bigger than lower boundary 
             new_stack = deepcopy(stack)
             new_stack.append(node.left.id)
             self.expand(node.left, new_stack, level + 1)
