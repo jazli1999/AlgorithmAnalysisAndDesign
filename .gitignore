@@ -1,2 +1,8 @@
+<<<<<<< HEAD
 .DS_Store/
 .vscode/
+=======
+.vscode/
+.DS_Store
+.DS_Store/
+>>>>>>> 00dff9eacdafc24a2df56bbdd96f35b6b4fc192a
