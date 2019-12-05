@@ -1,38 +1,62 @@
-from math import ceil
+from copy import deepcopy
 
 class Solution:
     # find the minimal number and its index
-    def __init__(self, nums):
+    def __init__(self, nums, k):
         self.all = nums
-        self.minimal = None
+        self.process = deepcopy(nums)
+        self.map = {}
+        self.k = k
+        self.answer = None
         self.pos = None
     
     def solve(self):
-        self.minimal, self.pos = self.devide(self.all, 0, len(self.all))
-        print('Minimal {0} at index {1}'.format(self.minimal, self.pos))
+        if self.k < 1 or self.k > len(self.process):
+            print('Illegal parameter {0}'.format(self.k))
 
-    def devide(self, nums, l, r):
-        if r - l > 2:
-            mid = ceil(l + (r - l) / 2)
-
-            left = list(self.all[l: mid])
-            right = list(self.all[mid: r])
-
-            l_min, l_pos = self.devide(left, l, mid)
-            r_min, r_pos = self.devide(right, mid, r)
-
-            if l_min < r_min:
-                return l_min, l_pos
-            else:
-                return r_min, r_pos
         else:
-            if self.all[l] < self.all[l+1]:
-                return self.all[l], l
-            else:
-                return self.all[l+1], l+1
-        
+            # record original index
+            self.update()
+            self.answer = self.devide(0, len(self.process)-1, self.k)
+            print('No.{0} Smallest of {1} is {2} at index {3}'.format(self.k, self.all, self.answer, self.map[self.answer]))
+
+    def devide(self, l, r, k):
+        if l >= r:
+            return self.process[min(l, r)]
+
+        pivot = self.process[l]
+        i = l
+        j = r
+        while True:
+            while self.process[j] > pivot and i < j:
+                j -= 1
+
+            if i != j:
+                self.process[i] = self.process[j]
+
+            while self.process[i] < pivot and i < j:
+                i += 1
             
+            if i != j:
+                self.process[j] = self.process[i]
+
+            if i == j:
+                self.process[i] = pivot
+
+                if j-l+1 == k:
+                    return self.process[j]
+                elif j-l+1 > k:
+                    return self.devide(l, i-1, k)
+                else:
+                    return self.devide(i+1, r, k-i-1)
+
+    def update(self):
+        for i, num in enumerate(self.process):
+            self.map[num] = i
+
+
 if __name__ == '__main__':
     demo = [10, 8, 2, 4, 5, 3, 9, 1]
-    solution = Solution(demo)
+    k = 7
+    solution = Solution(demo, k)
     solution.solve()

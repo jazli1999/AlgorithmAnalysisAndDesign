@@ -3,28 +3,46 @@ from copy import deepcopy
 class Solution:
     def __init__(self, jobs):
         self.jobs = jobs
-        self.solutions = {}
+        self.solutions = []
         self.best = [0, []]
     
     def solve(self):
-        self.solutions['es'] = self.earliest_start()
-        self.solutions['si'] = self.shortest_interval()
-        self.solutions['ef'] = self.earliest_finish()
-        self.solutions['fc'] = self.fewewt_conflicts()
+        print('Lectures in order of START TIME:')
+        self.earliest_start()
+        self.print_solutions()
 
+        print('Lectures in order of Finish Time:')
+        self.earliest_finish()
+        self.print_solutions()
+
+        print('Lectures in order of Interval:')
+        self.shortest_interval()
+        self.print_solutions()
+
+        print('Lectures in order of Fewest Conflicts:')
+        self.fewest_conflicts()
         self.print_solutions()
 
 
     def greedy(self, tasks):
         end = max(job[2] for job in self.jobs)
-        slots = [[0, '-'] for i in range(0, end)]
+        room = [[0, '-'] for i in range(0, end)]
+        rooms = [deepcopy(room)]
 
         for task in tasks:
-            needed = [slot[0] for slot in slots[task[1]: task[2]]]
-            if 1 not in needed:
-                slots[task[1]: task[2]] = [[1, task[0]] for i in range(task[1], task[2])]
-        
-        return slots
+            scheduled = False
+            for slots in rooms:
+                needed = [slot[0] for slot in slots[task[1]: task[2]]]
+                if 1 not in needed:
+                    slots[task[1]: task[2]] = [[1, task[0]] for i in range(task[1], task[2])]
+                    scheduled = True
+                    break
+            if not scheduled:
+               slots = deepcopy(room)
+               slots[task[1]: task[2]] = [[1, task[0]] for i in range(task[1], task[2])]
+               rooms.append(slots)
+
+        self.solutions = rooms
 
     def earliest_start(self):
         tasks = deepcopy(self.jobs)
@@ -44,7 +62,7 @@ class Solution:
         tasks.sort(key=finish)
         return self.greedy(tasks)
 
-    def fewewt_conflicts(self):
+    def fewest_conflicts(self):
         tasks = deepcopy(self.jobs)
         counter = 0
 
@@ -60,14 +78,9 @@ class Solution:
 
     def print_solutions(self):
         for solution in self.solutions:
-            vision = [slot[1] for slot in self.solutions[solution]]
+            vision = [slot[1] for slot in solution]
             total = len(set(vision)) - 1
-            print('{0}: {1}\t{2}'.format(solution, vision, total))
-            if total > self.best[0]:
-                self.best[0] = total
-                self.best[1] = vision
-        
-        print('\nProper solution:\n{0}\t{1}'.format(self.best[1], self.best[0]))
+            print(vision)
 
 def start(job):
     return job[1]
@@ -80,7 +93,7 @@ def finish(job):
 
 
 if __name__ == '__main__':
-    demo = [['a', 0, 6], ['b', 1, 4], ['c', 3, 5], ['d', 3, 8], 
-            ['e', 4, 7], ['f', 5, 9], ['g', 6, 10], ['h', 8, 11]]
+    demo = [['a', 0, 3], ['b', 0, 7], ['c', 0, 3], ['d', 4, 7], 
+            ['e', 4, 10], ['f', 8, 11], ['g', 8, 11], ['h', 10, 15], ['j', 12, 15]]
     solution = Solution(demo)
     solution.solve()
