@@ -93,7 +93,7 @@ def finish(job):
 
 
 if __name__ == '__main__':
-    demo = [['a', 0, 3], ['b', 0, 7], ['c', 0, 3], ['d', 4, 7], 
+    demo = [[]['a', 0, 3], ['b', 0, 7], ['c', 0, 3], ['d', 4, 7], 
             ['e', 4, 10], ['f', 8, 11], ['g', 8, 11], ['h', 10, 15], ['j', 12, 15]]
     solution = Solution(demo)
     solution.solve()
